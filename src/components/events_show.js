@@ -3,9 +3,9 @@ import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 import { Link } from "react-router-dom";
 
-import { postEvent } from "../actions";
+import { getEvent, deleteEvent, putEvent } from "../actions";
 
-class EventsNew extends Component {
+class EventsShow extends Component {
   constructor(props) {
     super(props);
     this.onSubmit = this.onSubmit.bind(this);
@@ -20,13 +20,12 @@ class EventsNew extends Component {
     return (
       <div>
         <input {...input} placeholder={label} type={type} />
-        {touched && error && <span>{error}</span>}
       </div>
     );
   }
 
   async onSubmit(values) {
-    await this.props.postEvent(values);
+    // await this.props.postEvent(values);
     this.props.history.push("/");
   }
 
@@ -72,9 +71,9 @@ const validate = values => {
   return errors;
 };
 
-const mapDispatchToProps = { postEvent };
+// const mapDispatchToProps = { postEvent };
 
 export default connect(
   null,
-  mapDispatchToProps
-)(reduxForm({ validate, form: "eventNewForm" })(EventsNew));
+  null
+)(reduxForm({ validate, form: "eventShowForm" })(EventsShow));
